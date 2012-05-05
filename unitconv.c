@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
 		stat = RET_UNKNOWN_UNIT;
 		
 		if (conv_length(val, unitname) != RET_UNKNOWN_UNIT) mark_checked;
+		if (conv_area(val, unitname) != RET_UNKNOWN_UNIT) mark_checked;
 		if (conv_mass(val, unitname) != RET_UNKNOWN_UNIT) mark_checked;
 		
 		if (stat == RET_UNKNOWN_UNIT) fprintf(stderr, "Unknown unit: %s\n", unitname);

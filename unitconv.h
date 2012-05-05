@@ -7,7 +7,7 @@
 #define RET_UNKNOWN_UNIT 3
 
 #define BUF_UNITNAME 40
-#define BUF_ALIASLIST 10
+#define BUF_ALIASLIST 20
 
 typedef struct {
 	char name[BUF_UNITNAME];
