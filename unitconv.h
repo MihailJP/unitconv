@@ -12,6 +12,7 @@
 typedef struct {
 	char name[BUF_UNITNAME];
 	double tr;
+	double zeroadj;
 	char alias[BUF_ALIASLIST][BUF_UNITNAME];
 } unit;
 
