@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <float.h>
+#include <math.h>
 #include "unitconv.h"
 #include "calc.h"
 
@@ -28,7 +29,7 @@ int calculate(double val, char *unitname, unsigned int listlen, unit unitlist[])
 		if (conversionfound) {
 			for (j = 0; j < listlen; j++) {
 				converted = (val + unitlist[i].zeroadj) * unitlist[i].tr / unitlist[j].tr - unitlist[j].zeroadj;
-				if ((converted < DBL_EPSILON)&&((unitlist[i].zeroadj != 0)||(unitlist[j].zeroadj != 0))) converted = 0;
+				if ((fabs(converted) < DBL_EPSILON)&&((unitlist[i].zeroadj != 0)||(unitlist[j].zeroadj != 0))) converted = 0;
 				printf("... %g %s\n", converted, unitlist[j].name);
 			}
 			printf("\n");
