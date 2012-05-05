@@ -1,4 +1,4 @@
-SRC = unitconv.c length.c area.c mass.c calc.c temp.c
+SRC = unitconv.c length.c area.c mass.c energy.c temp.c calc.c
 OBJ = $(SRC:%.c=%.o)
 TARGET = unitconv
 
@@ -15,6 +15,7 @@ calc.o: calc.h unitconv.h
 length.o: calc.h unitconv.h unitdata.h
 area.o: calc.h unitconv.h unitdata.h
 mass.o: calc.h unitconv.h unitdata.h
+energy.o: calc.h unitconv.h unitdata.h
 temp.o: calc.h unitconv.h unitdata.h
 
 clean:

@@ -20,10 +20,11 @@ int main(int argc, char *argv[])
 		unitname = argv[2];
 		stat = RET_UNKNOWN_UNIT;
 		
-		if (conv_length(val, unitname) != RET_UNKNOWN_UNIT) mark_checked;
-		if (conv_area(val, unitname) != RET_UNKNOWN_UNIT) mark_checked;
-		if (conv_mass(val, unitname) != RET_UNKNOWN_UNIT) mark_checked;
-		if (conv_temperature(val, unitname) != RET_UNKNOWN_UNIT) mark_checked;
+		if (conv_length(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
+		if (conv_area(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
+		if (conv_mass(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
+		if (conv_energy(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
+		if (conv_temperature(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
 		
 		if (stat == RET_UNKNOWN_UNIT) fprintf(stderr, "Unknown unit: %s\n", unitname);
 		return stat;

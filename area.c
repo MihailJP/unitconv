@@ -9,9 +9,9 @@
 #define CHINESE_SQUARE_FEET (1.0/9.0)
 #define JAPANESE_TSUBO (60.0/33.0*60.0/33.0)
 
-int conv_area(double val, char *unitname)
+int conv_area(double val, char *unitname, unsigned int chainflag)
 {
-	int i;
+	int i, ret; double cnvval;
 	unit unitlist[] = {
 		/* Metric */
 		{"mm^2", 1e-6, 0, {"mm2","squaremillimeter","squaremillimetre","square millimeter","square millimetre","millimetersquared","millimetresquared","millimeter squared","millimetre squared",""}},
@@ -73,7 +73,8 @@ int conv_area(double val, char *unitname)
 	};
 	unsigned int listlen = (sizeof(unitlist) / sizeof(unit));
 	
-	return calculate(val, unitname, listlen, unitlist);
+	ret = calculate(val, unitname, listlen, unitlist, chainflag, "area", &cnvval);
+	return ret;
 }
 
 #undef SQUARE_FOOT

@@ -8,11 +8,9 @@
 #define CHINESE_POUND 5e-1
 #define HK_POUND 6.0478982e-1
 #define JAPANESE_POUND 6e-1
-#define ELECTRON_VOLT 1.7826e-36
-#define JOULE ELECTRON_VOLT/1.60217733e-19
-int conv_mass(double val, char *unitname)
+int conv_mass(double val, char *unitname, unsigned int chainflag)
 {
-	int i;
+	int i, ret; double cnvval;
 	unit unitlist[] = {
 		/* Metric */
 		{"ug", 1e-9, 0, {"microgram","microgramme","gamma",""}},
@@ -70,30 +68,18 @@ int conv_mass(double val, char *unitname)
 		{"kin", JAPANESE_POUND, 0, {"catty(JP)","catty(TW)","catty","jin",""}},
 		{"kan", JAPANESE_POUND * 6.25, 0, {""}},
 		{"picul(TW)", JAPANESE_POUND * 100, 0, {"picul","dan",""}},
-		/* Energy */
-		{"nJ", JOULE * 1e-9, 0, {"nanojoule",""}},
-		{"uJ", JOULE * 1e-6, 0, {"microjoule",""}},
-		{"mJ", JOULE * 1e-3, 0, {"millijoule",""}},
-		{"J", JOULE, 0, {"joule",""}},
-		{"kJ", JOULE * 1e3, 0, {"kilojoule",""}},
-		{"MJ", JOULE * 1e6, 0, {"megajoule",""}},
-		{"GJ", JOULE * 1e9, 0, {"gigajoule",""}},
-		{"TJ", JOULE * 1e12, 0, {"terajoule",""}},
-		{"eV", ELECTRON_VOLT, 0, {"electronvolt","electron volt",""}},
-		{"keV", ELECTRON_VOLT * 1e3, 0, {"kiloelectronvolt",""}},
-		{"MeV", ELECTRON_VOLT * 1e6, 0, {"megaelectronvolt",""}},
-		{"GeV", ELECTRON_VOLT * 1e9, 0, {"gigaelectronvolt",""}},
-		{"TeV", ELECTRON_VOLT * 1e12, 0, {"teraelectronvolt",""}},
-		{"E_p", 1.9561e9 * JOULE, 0, {"planckenergy","planck energy","Planck energy",""}},
 	};
 	unsigned int listlen = (sizeof(unitlist) / sizeof(unit));
 	
-	return calculate(val, unitname, listlen, unitlist);
+	ret = calculate(val, unitname, listlen, unitlist, chainflag, "mass", &cnvval);
+	if ((!(chainflag&MODE_CHAINED))&&(ret != RET_UNKNOWN_UNIT)) {
+		printf("And equivalent energy is...\n");
+		conv_energy(cnvval / 1.782661845e-36, "eV", MODE_CHAINED);
+	}
+	return ret;
 }
 #undef POUND_AVOIRDUPOIS
 #undef POUND_TROY
 #undef CHINESE_POUND
 #undef HK_POUND
 #undef JAPANESE_POUND
-#undef ELECTRON_VOLT
-#undef JOULE

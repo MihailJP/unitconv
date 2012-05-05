@@ -3,9 +3,9 @@
 #include "calc.h"
 #include "unitdata.h"
 
-int conv_temperature(double val, char *unitname)
+int conv_temperature(double val, char *unitname, unsigned int chainflag)
 {
-	int i;
+	int i, ret; double cnvval;
 	unit unitlist[] = {
 		{"K", 1, 0, {"kelvin","Kelvin",""}}, /* SI */
 		{"deg C", 1, 273.15, {"degc","degC","Celsius","centigrade",""}}, /* metric */
@@ -18,5 +18,10 @@ int conv_temperature(double val, char *unitname)
 	};
 	unsigned int listlen = (sizeof(unitlist) / sizeof(unit));
 	
-	return calculate(val, unitname, listlen, unitlist);
+	ret = calculate(val, unitname, listlen, unitlist, chainflag, "temperature", &cnvval);
+	if ((!(chainflag&MODE_CHAINED))&&(ret != RET_UNKNOWN_UNIT)) {
+		printf("And equivalent energy is...\n");
+		conv_energy(cnvval / 11604, "eV", MODE_CHAINED);
+	}
+	return ret;
 }

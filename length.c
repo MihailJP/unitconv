@@ -9,9 +9,9 @@
 #define CHINESE_FOOT (1.0/3.0)
 #define HK_FOOT 3.71475e-1
 #define JAPANESE_FOOT (10.0/33.0)
-int conv_length(double val, char *unitname)
+int conv_length(double val, char *unitname, unsigned int chainflag)
 {
-	int i;
+	int i, ret; double cnvval;
 	unit unitlist[] = {
 		/* Metric */
 		{"fm", 1e-15, 0, {"femtometer","femtometre","fermi",""}},
@@ -125,7 +125,8 @@ int conv_length(double val, char *unitname)
 	};
 	unsigned int listlen = (sizeof(unitlist) / sizeof(unit));
 	
-	return calculate(val, unitname, listlen, unitlist);
+	ret = calculate(val, unitname, listlen, unitlist, chainflag, "length", &cnvval);
+	return ret;
 }
 #undef LIGHT_SECOND
 #undef FOOT

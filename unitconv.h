@@ -9,6 +9,8 @@
 #define BUF_UNITNAME 40
 #define BUF_ALIASLIST 20
 
+#define MODE_CHAINED 0x00000001
+
 typedef struct {
 	char name[BUF_UNITNAME];
 	double tr;
