@@ -3,5 +3,6 @@
 
 #include "unitconv.h"
 int conv_length(double, char *);
+int conv_mass(double, char *);
 
 #endif /* UNITDATA_H */

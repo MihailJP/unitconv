@@ -6,7 +6,7 @@
 #define RET_NOT_ENOUGH_PARAM 2
 #define RET_UNKNOWN_UNIT 3
 
-#define BUF_UNITNAME 20
+#define BUF_UNITNAME 40
 #define BUF_ALIASLIST 10
 
 typedef struct {
