@@ -3,6 +3,9 @@
 *.lo
 *.o
 
+unitconv
+unitconv.exe
+
 # Compiled Dynamic libraries
 *.so
 
