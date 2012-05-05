@@ -63,7 +63,7 @@ int conv_length(double val, char *unitname)
 		{"yd", FOOT * 3, {"yard",""}},
 		{"ell", FOOT * 3.75, {""}},
 		{"fathom", FOOT * 6, {"fm",""}},
-		{"rd", FOOT * 16.5, {"rod",""}},
+		{"rd", FOOT * 16.5, {"rod","pole","perch",""}},
 		{"rope", FOOT * 20, {""}},
 		{"ch", FOOT * 66, {"chain",""}},
 		{"ch(Ramsden)", FOOT * 100, {"chain(Ramsden)",""}},
