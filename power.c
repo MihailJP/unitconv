@@ -13,8 +13,8 @@ int conv_power(double val, char *unitname, unsigned int chainflag)
 		/* calorie */
 		{"cal/s", CALORIE_IT_TO_JOULE, 0, {"cal_IT/s","cal(IT)/s","caloriepersecond","calorie per second",""}},
 		/* Miscellaneous */
-		{"kgf m/s", 1.0 / GRAVACC, 0, {"kgf*m/s","kgfm/s","kilogramforcemeterpersecond","kilogrammeforcemetrepersecond","kilogramforce meter per second","kilogrammeforce metre per second","kilogramforce-meter per second","kilogrammeforce-metre per second","kilogram-force meter per second","kilogramme-force metre per second","kilogram-force-meter per second","kilogramme-force-metre per second",""}},
-		{"p", 100.0 / GRAVACC, 0, {"poncelet",""}},
+		{"kgf m/s", 1.0 * GRAVACC, 0, {"kgf*m/s","kgfm/s","kilogramforcemeterpersecond","kilogrammeforcemetrepersecond","kilogramforce meter per second","kilogrammeforce metre per second","kilogramforce-meter per second","kilogrammeforce-metre per second","kilogram-force meter per second","kilogramme-force metre per second","kilogram-force-meter per second","kilogramme-force-metre per second",""}},
+		{"p", 100.0 * GRAVACC, 0, {"poncelet",""}},
 		{"erg/s", 1e-7, 0, {""}},
 		{"atm ccm", ATMOSPHERE * 1e-6 / MINUTE_TO_SECOND, 0, {"atmccm",""}},
 		{"atm ccs", ATMOSPHERE * 1e-6, 0, {"atmccs",""}},
@@ -36,12 +36,6 @@ int conv_power(double val, char *unitname, unsigned int chainflag)
 	unsigned int listlen = (sizeof(unitlist) / sizeof(unit));
 	
 	ret = calculate(val, unitname, listlen, unitlist, chainflag, "power", &cnvval);
-/*	if ((!(chainflag&MODE_CHAINED))&&(ret != RET_UNKNOWN_UNIT)) {
-		printf("And equivalent mass is...\n");
-		conv_mass(cnvval / ELECTRON_VOLT * 1.782661845e-36, "kg", MODE_CHAINED);
-		printf("And equivalent temperature is...\n");
-		conv_temperature(cnvval / ELECTRON_VOLT * 11604, "K", MODE_CHAINED);
-	}*/
 	return ret;
 }
 #undef ELECTRON_VOLT

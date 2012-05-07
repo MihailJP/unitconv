@@ -39,8 +39,8 @@ int conv_energy(double val, char *unitname, unsigned int chainflag)
 		{"TCE", CALORIE_TH_TO_JOULE * 7e9, 0, {"toncoal","tonofcoal","ton of coal","tonofcoaleqv","tonofcoalequiv","tonofcoalequivalent","ton of coal equivalent",""}},
 		{"TOE", CALORIE_TH_TO_JOULE * 10e9, 0, {"tonoil","tonofoil","ton of oil","tonofoileqv","tonofoilequiv","tonofoilequivalent","ton of oil equivalent",""}},
 		/* Miscellaneous */
-		{"gf m", 1.0 / GRAVACC * 1e-3, 0, {"gf*m","gfm","gramforcemeter","grammeforcemetre","gramforce meter","grammeforce metre","gramforce-meter","grammeforce-metre","gram-force meter","gramme-force metre","gram-force-meter","gramme-force-metre",""}},
-		{"kgf m", 1.0 / GRAVACC, 0, {"kgf*m","kgfm","kilogramforcemeter","kilogrammeforcemetre","kilogramforce meter","kilogrammeforce metre","kilogramforce-meter","kilogrammeforce-metre","kilogram-force meter","kilogramme-force metre","kilogram-force-meter","kilogramme-force-metre",""}},
+		{"gf m", 1.0 * GRAVACC * 1e-3, 0, {"gf*m","gfm","gramforcemeter","grammeforcemetre","gramforce meter","grammeforce metre","gramforce-meter","grammeforce-metre","gram-force meter","gramme-force metre","gram-force-meter","gramme-force-metre",""}},
+		{"kgf m", 1.0 * GRAVACC, 0, {"kgf*m","kgfm","kilogramforcemeter","kilogrammeforcemetre","kilogramforce meter","kilogrammeforce metre","kilogramforce-meter","kilogrammeforce-metre","kilogram-force meter","kilogramme-force metre","kilogram-force-meter","kilogramme-force-metre",""}},
 		{"erg", 1e-7, 0, {""}},
 		{"CHU", 1.899100534716e3, 0, {""}},
 		{"cc atm", ATMOSPHERE * 1e-6, 0, {"ccatm","scc",""}},
