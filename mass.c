@@ -16,8 +16,8 @@ int conv_mass(double val, char *unitname, unsigned int chainflag)
 		/* Miscellaneous */
 		{"u", 1.66053873e-27, 0, {"AMU",""}},
 		{"Da", 1.66090210e-27, 0, {"dalton",""}},
-		{"m_e", 9.10938215e-31, 0, {""}},
-		{"m_p", 2.17644e-8, 0, {"planckmass","planck mass","Planck mass",""}},
+		{"m_e", ELECTRON_MASS, 0, {""}},
+		{"m_p", PLANCK_MASS, 0, {"planckmass","planck mass","Planck mass",""}},
 		/* US Customary-Imperial */
 		{"mite", GRAIN_TO_KILOGRAM / 20, 0, {""}},
 		{"gr", GRAIN_TO_KILOGRAM, 0, {"grain",""}},

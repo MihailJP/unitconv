@@ -2,9 +2,28 @@
 #define UNITDATA_H
 
 #include "unitconv.h"
+#include <math.h>
+
+/* Physical constants */
+#define LIGHTSPEED 299792458.0 /* metres per second */
+#define GRAVCONST 6.67259e-11 /* newton-square-metres per kilogram squared */
+#define PERMEABILITY (4.0*M_PI*1e-7) /* newtons per ampere squared */
+#define IMPEDANCE (PERMEABILITY*LIGHTSPEED) /* ohms */
+#define PERMITTIVITY (1.0/PERMEABILITY/LIGHTSPEED/LIGHTSPEED) /* farads per metre */
+#define PLANCKCONST 6.62606957e-34 /* joule-seconds */
+#define H_BAR (PLANCKCONST / (2.0 * M_PI)) /* joule-seconds */
+
+#define GRAVACC 9.80665 /* metres per second squared */
+#define ATMOSPHERE 101325.0 /* pascals */
+#define ELEMENTARY_CHARGE 1.60217653e-19 /* coulombs */
+#define ELECTRON_MASS 9.10938215e-31 /* kilograms */
+
+#define FINE_STRUCT (ELEMENTARY_CHARGE*ELEMENTARY_CHARGE/4.0/M_PI/PERMITTIVITY/H_BAR/LIGHTSPEED) /* dimentionless */
+#define RYDBERG_CONST (FINE_STRUCT*FINE_STRUCT*ELECTRON_MASS*LIGHTSPEED/2.0/PLANCKCONST)
+#define BOHR_RADIUS (FINE_STRUCT/4.0/M_PI/RYDBERG_CONST) /* metres */
 
 /* Length */
-#define LIGHTSECOND_TO_METRE 2.99792458e8
+#define LIGHTSECOND_TO_METRE LIGHTSPEED
 #define NAUTICAL_MILE_TO_METRE 1852
 #define FOOT_TO_METRE 3.048e-1
 #define INCH_TO_METRE (FOOT_TO_METRE/12)
@@ -14,6 +33,7 @@
 #define CHINESE_FOOT_TO_METRE (1.0/3.0)
 #define HK_FOOT_TO_METRE 3.71475e-1
 #define JAPANESE_FOOT_TO_METRE (10.0/33.0)
+#define PLANCK_LENGTH sqrt(H_BAR*GRAVCONST/LIGHTSPEED/LIGHTSPEED/LIGHTSPEED)
 
 /* Area */
 #define SQFOOT_TO_SQMETRE (HK_FOOT_TO_METRE*HK_FOOT_TO_METRE)
@@ -22,6 +42,7 @@
 #define CHINESE_MU_TO_SQMETRE (2000.0/3.0)
 #define CHINESE_SQFOOT_TO_SQMETRE (CHINESE_FOOT_TO_METRE*CHINESE_FOOT_TO_METRE)
 #define JAPANESE_TSUBO_TO_SQMETRE (JAPANESE_FOOT_TO_METRE*JAPANESE_FOOT_TO_METRE*36)
+#define PLANCK_AREA H_BAR*GRAVCONST/LIGHTSPEED/LIGHTSPEED/LIGHTSPEED
 
 /* Mass */
 #define POUND_AV_TO_KILOGRAM 4.5359237e-1
@@ -30,11 +51,14 @@
 #define CATTY_TO_KILOGRAM 5e-1
 #define HK_CATTY_TO_KILOGRAM 6.0478982e-1
 #define JAPANESE_CATTY_TO_KILOGRAM 6e-1
+#define PLANCK_MASS sqrt(LIGHTSPEED*H_BAR/GRAVCONST)
 
 /* Time */
 #define MINUTE_TO_SECOND 60
 #define HOUR_TO_SECOND 3600
 #define DAY_TO_SECOND 86400
+#define YEAR_TO_SECOND (DAY_TO_SECOND*365.25)
+#define PLANCK_TIME sqrt(H_BAR*GRAVCONST/LIGHTSPEED/LIGHTSPEED/LIGHTSPEED/LIGHTSPEED/LIGHTSPEED)
 
 /* Energy */
 #define ELECTRONVOLT_TO_JOULE 1.60217653e-19
@@ -44,15 +68,21 @@
 #define BTU_IT_TO_JOULE 1.05505585262e3
 #define BTU_59F_TO_JOULE 1.054804e3
 #define FOOTLBF_TO_JOULE 1.3558179483314004
+#define RYDBERG_TO_JOULE (RYDBERG_CONST*PLANCKCONST*LIGHTSPEED)
+#define PLANCK_ENERGY (PLANCK_MASS*LIGHTSPEED*LIGHTSPEED)
 
 /* Mass-energy equivalence (E = m c^2) */
 #define KILOGRAM_TO_ELECTRONVOLT 1.782661845e-36
+
+/* Power */
+#define PLANCK_POWER (LIGHTSPEED*LIGHTSPEED*LIGHTSPEED*LIGHTSPEED*LIGHTSPEED/GRAVCONST)
 
 /* Functions */
 int conv_length(double, char *, unsigned int);
 int conv_area(double, char *, unsigned int);
 int conv_mass(double, char *, unsigned int);
 int conv_energy(double, char *, unsigned int);
+int conv_power(double, char *, unsigned int);
 int conv_temperature(double, char *, unsigned int);
 
 #endif /* UNITDATA_H */
