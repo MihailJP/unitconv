@@ -8,7 +8,7 @@ $(TARGET): $(OBJ)
 	gcc -o $@ $^
 
 .c.o:
-	gcc -c $<
+	gcc -c -O2 $<
 
 unitconv.o: unitconv.h unitdata.h
 calc.o: calc.h unitconv.h
