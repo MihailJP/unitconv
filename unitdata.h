@@ -7,9 +7,6 @@
 /* Physical constants */
 #define LIGHTSPEED 299792458.0 /* metres per second */
 #define GRAVCONST 6.67384e-11 /* newton-square-metres per kilogram squared */
-#define PERMEABILITY (4.0*M_PI*1e-7) /* newtons per ampere squared */
-#define IMPEDANCE (PERMEABILITY*LIGHTSPEED) /* ohms */
-#define PERMITTIVITY (1.0/PERMEABILITY/LIGHTSPEED/LIGHTSPEED) /* farads per metre */
 #define PLANCKCONST 6.62606957e-34 /* joule-seconds */
 #define H_BAR (PLANCKCONST / (2.0 * M_PI)) /* joule-seconds */
 
@@ -18,7 +15,12 @@
 #define ELEMENTARY_CHARGE 1.60217653e-19 /* coulombs */
 #define ELECTRON_MASS 9.10938215e-31 /* kilograms */
 
-#define FINE_STRUCT (ELEMENTARY_CHARGE*ELEMENTARY_CHARGE/4.0/M_PI/PERMITTIVITY/H_BAR/LIGHTSPEED) /* dimentionless */
+#define PERMEABILITY (4.0*M_PI*1e-7) /* newtons per ampere squared */
+#define IMPEDANCE (PERMEABILITY*LIGHTSPEED) /* ohms */
+#define PERMITTIVITY (1.0/PERMEABILITY/LIGHTSPEED/LIGHTSPEED) /* farads per metre */
+
+#define COULOMB_CONST (1.0/4.0/M_PI/PERMITTIVITY)
+#define FINE_STRUCT (ELEMENTARY_CHARGE*ELEMENTARY_CHARGE*COULOMB_CONST/H_BAR/LIGHTSPEED) /* dimentionless */
 #define RYDBERG_CONST (FINE_STRUCT*FINE_STRUCT*ELECTRON_MASS*LIGHTSPEED/2.0/PLANCKCONST)
 #define BOHR_RADIUS (FINE_STRUCT/4.0/M_PI/RYDBERG_CONST) /* metres */
 
