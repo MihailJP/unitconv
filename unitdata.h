@@ -13,7 +13,11 @@
 #define GRAVACC 9.80665 /* metres per second squared */
 #define ATMOSPHERE 101325.0 /* pascals */
 #define ELEMENTARY_CHARGE 1.60217653e-19 /* coulombs */
+
 #define ELECTRON_MASS 9.10938215e-31 /* kilograms */
+#define AVOGADRO_CONST 6.02214129e23 /* per mol */
+#define GAS_CONST 8.3144621 /* J K^-1 mol^-1 */
+#define BOLTZMANN_CONST (GAS_CONST/AVOGADRO_CONST) /* joules per kelvin */
 
 #define PERMEABILITY (4.0*M_PI*1e-7) /* newtons per ampere squared */
 #define IMPEDANCE (PERMEABILITY*LIGHTSPEED) /* ohms */
@@ -101,6 +105,9 @@
 
 /* Power */
 #define PLANCK_POWER (LIGHTSPEED*LIGHTSPEED*LIGHTSPEED*LIGHTSPEED*LIGHTSPEED/GRAVCONST)
+
+/* Temperature */
+#define PLANCK_TEMPERATURE (PLANCK_MASS*LIGHTSPEED*LIGHTSPEED/BOLTZMANN_CONST)
 
 /* Functions */
 int conv_length(double, char *, unsigned int);

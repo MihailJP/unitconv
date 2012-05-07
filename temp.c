@@ -15,6 +15,7 @@ int conv_temperature(double val, char *unitname, unsigned int chainflag)
 		{"deg N", 100.0/33.0, 90.1395, {"degn","degN","Newton",""}},
 		{"deg Re", 1.25, 218.52, {"degre","degRe","Reaumur",""}}, 
 		{"deg Ro", 40.0/21.0, 135.90375, {"degro","degRo","Romer","Roemer",""}}, 
+		{"T_p", PLANCK_TEMPERATURE, 0, {"plancktemperature","planck temperature","Planck temperature",""}}, 
 	};
 	unsigned int listlen = (sizeof(unitlist) / sizeof(unit));
 	
