@@ -16,14 +16,16 @@ int conv_mass(double val, char *unitname, unsigned int chainflag)
 		/* Miscellaneous */
 		{"u", 1.66053873e-27, 0, {"AMU",""}},
 		{"Da", 1.66090210e-27, 0, {"dalton",""}},
-		{"m_e", ELECTRON_MASS, 0, {""}},
+		/* Atomic unit */
+		{"m_e", ELECTRON_MASS, 0, {"electronmass","electron mass","electron still mass","electronstillmass","au","aumass","au(mass)","atomicmass","atomicunitmass","atomicunitofmass","atomic unit of mass"}},
+		/* Planck unit */
 		{"m_p", PLANCK_MASS, 0, {"planckmass","planck mass","Planck mass",""}},
 		/* US Customary-Imperial */
 		{"mite", GRAIN_TO_KILOGRAM / 20, 0, {""}},
 		{"gr", GRAIN_TO_KILOGRAM, 0, {"grain",""}},
-		{"sheet", POUND_AV_TO_KILOGRAM / 700, 0, {""}},
+		{"sheet", GRAIN_TO_KILOGRAM * 10, 0, {""}},
 		{"dr av", GRAIN_TO_KILOGRAM * 27.34375, 0, {"drav","dr","dram",""}},
-		{"oz av", POUND_AV_TO_KILOGRAM / 16, 0, {"ozav","oz","ounce",""}},
+		{"oz av", OUNCE_AV_TO_KILOGRAM, 0, {"ozav","oz","ounce",""}},
 		{"lb av", POUND_AV_TO_KILOGRAM, 0, {"lbav","lb","pound",""}},
 		{"clove", POUND_AV_TO_KILOGRAM * 8, 0, {""}},
 		{"st", POUND_AV_TO_KILOGRAM * 14, 0, {"stone",""}},

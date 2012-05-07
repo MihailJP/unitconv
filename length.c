@@ -20,9 +20,11 @@ int conv_length(double val, char *unitname, unsigned int chainflag)
 		{"Mm", 1e6, 0, {"megameter","megametre",""}},
 		{"Gm", 1e9, 0, {"gigameter","gigametre",""}},
 		{"Tm", 1e12, 0, {"terameter","terametre","spat",""}},
-		/* Miscellaneous */
+		/* Atomic unit */
+		{"a_0", BOHR_RADIUS, 0, {"bohr","bohrradius","bohr radius","Bohr radius","au","au(length)","aulength","atomiclength","atomicunitlength","atomicunitoflength","atomic unit of length",""}},
+		/* Planck unit */
 		{"l_p", sqrt(H_BAR * GRAVCONST / LIGHTSPEED / LIGHTSPEED / LIGHTSPEED), 0, {"plancklength","planck length","Planck length",""}},
-		{"a_0", BOHR_RADIUS, 0, {"bohr","bohrradius","bohr radius","Bohr radius","au",""}},
+		/* Miscellaneous */
 		{"angstrom", 1e-10, 0, {""}},
 		{"pc", 3.08567782e16, 0, {"parsec",""}},
 		{"AU", 1.49597870691e11, 0, {"astronomicalunit","astronomical unit",""}},

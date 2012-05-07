@@ -30,7 +30,7 @@ int conv_power(double val, char *unitname, unsigned int chainflag)
 		{"ft lbf/h", FOOTLBF_TO_JOULE / HOUR_TO_SECOND, 0, {"ft*lbf/h","ftlbf/h","footpoundforceperhour","footpoundforce per hour","foot-poundforce per hour","foot-pound force per hour",""}},
 		{"ft lbf/min", FOOTLBF_TO_JOULE / MINUTE_TO_SECOND, 0, {"ft*lbf/min","ftlbf/min","footpoundforceperminute","footpoundforce per minute","foot-poundforce per minute","foot-pound force per minute",""}},
 		{"ft lbf/s", FOOTLBF_TO_JOULE, 0, {"ft*lbf/s","ftlbf/s","footpoundforcepersecond","footpoundforce per second","foot-poundforce per second","foot-pound force per second",""}},
-		{"hp", 550.0 * FOOTLBF_TO_JOULE, 0, {"horsepower",""}},
+		{"hp", HORSEPOWER_TO_JOULE, 0, {"horsepower",""}},
 		{"PS", 75.0 / GRAVACC, 0, {"hp(metric)","horsepower(metric)","metrichorsepower","metric horsepower",""}},
 	};
 	unsigned int listlen = (sizeof(unitlist) / sizeof(unit));

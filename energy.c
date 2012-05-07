@@ -47,7 +47,9 @@ int conv_energy(double val, char *unitname, unsigned int chainflag)
 		{"l atm", ATMOSPHERE * 1e-3, 0, {"latm","litreatmosphere","literatmosphere","litre-atmosphere","liter-atmosphere","sl",""}},
 		{"foe", 1e44, 0, {""}},
 		{"Ry", RYDBERG_TO_JOULE, 0, {"rydberg",""}},
-		{"E_h", RYDBERG_TO_JOULE * 2.0, 0, {"hartree",""}},
+		/* Atomic unit */
+		{"E_h", HARTREE_TO_JOULE, 0, {"hartree","au","auenergy","au(energy)","atomicenergy","atomicunitenergy","atomicunitofenergy","atomic unit of energy",""}},
+		/* Planck unit */
 		{"E_p", PLANCK_ENERGY, 0, {"planckenergy","planck energy","Planck energy",""}},
 		/* British thermal unit */
 		{"BTU", 1.0545e3, 0, {"BTU_ISO","BTU(ISO)","Btu_ISO","Btu(ISO)",""}},
@@ -61,8 +63,8 @@ int conv_energy(double val, char *unitname, unsigned int chainflag)
 		/* Imperial */
 		{"in lbf", FOOTLBF_TO_JOULE / 12, 0, {"in*lbf","inlbf","inchpoundforce","inch-poundforce","inch-pound force",""}},
 		{"ft lbf", FOOTLBF_TO_JOULE, 0, {"ft*lbf","ftlbf","footpoundforce","foot-poundforce","foot-pound force",""}},
-		{"ft pdl", 4.21401100938048e-2, 0, {"ft*pdl","ftpdl","footpoundal","foot-poundal",""}},
-		{"hp h", 2.684519537696172792e6, 0, {"hp*h","hph","horsepowerhour","horsepower-hour",""}},
+		{"ft pdl", FOOTLBF_TO_JOULE * POUNDAL_TO_NEWTON, 0, {"ft*pdl","ftpdl","footpoundal","foot-poundal",""}},
+		{"hp h", HORSEPOWER_TO_JOULE * HOUR_TO_SECOND, 0, {"hp*h","hph","horsepowerhour","horsepower-hour",""}},
 	};
 	unsigned int listlen = (sizeof(unitlist) / sizeof(unit));
 	

@@ -48,6 +48,7 @@
 
 /* Mass */
 #define POUND_AV_TO_KILOGRAM 4.5359237e-1
+#define OUNCE_AV_TO_KILOGRAM (POUND_AV_TO_KILOGRAM/16)
 #define GRAIN_TO_KILOGRAM (POUND_AV_TO_KILOGRAM/7000)
 #define POUND_TROY_TO_KILOGRAM (GRAIN_TO_KILOGRAM*5760)
 #define CATTY_TO_KILOGRAM 5e-1
@@ -62,6 +63,12 @@
 #define YEAR_TO_SECOND (DAY_TO_SECOND*365.25)
 #define PLANCK_TIME sqrt(H_BAR*GRAVCONST/LIGHTSPEED/LIGHTSPEED/LIGHTSPEED/LIGHTSPEED/LIGHTSPEED)
 
+/* Force */
+#define LBF_TO_NEWTON (POUND_AV_TO_KILOGRAM*GRAVACC)
+#define OZF_TO_NEWTON (OUNCE_AV_TO_KILOGRAM*GRAVACC)
+#define POUNDAL_TO_NEWTON (POUND_AV_TO_KILOGRAM*FOOT_TO_METRE*FOOT_TO_METRE)
+#define PLANCK_FORCE (LIGHTSPEED*LIGHTSPEED*LIGHTSPEED*LIGHTSPEED/GRAVCONST)
+
 /* Energy */
 #define ELECTRONVOLT_TO_JOULE 1.60217653e-19
 #define WATTHOUR_TO_JOULE HOUR_TO_SECOND
@@ -70,7 +77,9 @@
 #define BTU_IT_TO_JOULE 1.05505585262e3
 #define BTU_59F_TO_JOULE 1.054804e3
 #define FOOTLBF_TO_JOULE 1.3558179483314004
+#define HORSEPOWER_TO_JOULE (550.0*FOOTLBF_TO_JOULE)
 #define RYDBERG_TO_JOULE (RYDBERG_CONST*PLANCKCONST*LIGHTSPEED)
+#define HARTREE_TO_JOULE (RYDBERG_TO_JOULE*2.0)
 #define PLANCK_ENERGY (PLANCK_MASS*LIGHTSPEED*LIGHTSPEED)
 
 /* Mass-energy equivalence (E = m c^2) */
@@ -83,6 +92,7 @@
 int conv_length(double, char *, unsigned int);
 int conv_area(double, char *, unsigned int);
 int conv_mass(double, char *, unsigned int);
+int conv_force(double, char *, unsigned int);
 int conv_energy(double, char *, unsigned int);
 int conv_power(double, char *, unsigned int);
 int conv_temperature(double, char *, unsigned int);

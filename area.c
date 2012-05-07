@@ -19,6 +19,7 @@ int conv_area(double val, char *unitname, unsigned int chainflag)
 		{"shed", 1e-52, 0, {""}},
 		{"b", 1e-28, 0, {"barn",""}},
 		{"stremma", 1e3, 0, {"dunam","dunum","donum",""}},
+		/* Planck unit */
 		{"l^2_p", PLANCK_AREA, 0, {"l2_p","planckarea","planck area","Planck area",""}},
 		/* US Customary-Imperial */
 		{"sq in", SQFOOT_TO_SQMETRE / 12 / 12, 0, {"sqin","in^2","in2","squareinch","square inch", "inchsquared","inch squared",""}},
