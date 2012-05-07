@@ -61,10 +61,17 @@
 #define PLANCK_MASS sqrt(LIGHTSPEED*H_BAR/GRAVCONST)
 
 /* Time */
-#define MINUTE_TO_SECOND 60
-#define HOUR_TO_SECOND 3600
-#define DAY_TO_SECOND 86400
+#define MINUTE_TO_SECOND 60.0
+#define HOUR_TO_SECOND 3600.0
+#define DAY_TO_SECOND 86400.0
+#define MONTH_FL_TO_SECOND (DAY_TO_SECOND*30)
+#define MONTH_HOL_TO_SECOND (DAY_TO_SECOND*29)
+#define MONTH_SYN_TO_SECOND (DAY_TO_SECOND*29.530589)
 #define YEAR_TO_SECOND (DAY_TO_SECOND*365.25)
+#define YEAR_GR_TO_SECOND (DAY_TO_SECOND*365.2425)
+#define YEAR_VAGUE_TO_SECOND (DAY_TO_SECOND*365)
+#define YEAR_SID_TO_SECOND (DAY_TO_SECOND*365.256363)
+#define YEAR_TROP_TO_SECOND (DAY_TO_SECOND*365.242190)
 #define PLANCK_TIME sqrt(H_BAR*GRAVCONST/LIGHTSPEED/LIGHTSPEED/LIGHTSPEED/LIGHTSPEED/LIGHTSPEED)
 
 /* Density */
@@ -113,6 +120,7 @@
 int conv_length(double, char *, unsigned int);
 int conv_area(double, char *, unsigned int);
 int conv_mass(double, char *, unsigned int);
+int conv_time(double, char *, unsigned int);
 int conv_force(double, char *, unsigned int);
 int conv_pressure(double, char *, unsigned int);
 int conv_energy(double, char *, unsigned int);
