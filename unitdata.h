@@ -6,7 +6,7 @@
 
 /* Physical constants */
 #define LIGHTSPEED 299792458.0 /* metres per second */
-#define GRAVCONST 6.67259e-11 /* newton-square-metres per kilogram squared */
+#define GRAVCONST 6.67384e-11 /* newton-square-metres per kilogram squared */
 #define PERMEABILITY (4.0*M_PI*1e-7) /* newtons per ampere squared */
 #define IMPEDANCE (PERMEABILITY*LIGHTSPEED) /* ohms */
 #define PERMITTIVITY (1.0/PERMEABILITY/LIGHTSPEED/LIGHTSPEED) /* farads per metre */
