@@ -63,11 +63,25 @@
 #define YEAR_TO_SECOND (DAY_TO_SECOND*365.25)
 #define PLANCK_TIME sqrt(H_BAR*GRAVCONST/LIGHTSPEED/LIGHTSPEED/LIGHTSPEED/LIGHTSPEED/LIGHTSPEED)
 
+/* Density */
+#define MERCURY_DENSITY 1.35951e4
+#define WATER_DENSITY 9.99972e2
+
 /* Force */
 #define LBF_TO_NEWTON (POUND_AV_TO_KILOGRAM*GRAVACC)
 #define OZF_TO_NEWTON (OUNCE_AV_TO_KILOGRAM*GRAVACC)
 #define POUNDAL_TO_NEWTON (POUND_AV_TO_KILOGRAM*FOOT_TO_METRE*FOOT_TO_METRE)
 #define PLANCK_FORCE (LIGHTSPEED*LIGHTSPEED*LIGHTSPEED*LIGHTSPEED/GRAVCONST)
+#define PLANCK_PRESSURE (LIGHTSPEED*LIGHTSPEED*LIGHTSPEED*LIGHTSPEED*LIGHTSPEED*LIGHTSPEED*LIGHTSPEED/H_BAR/GRAVCONST/GRAVCONST)
+
+/* Pressure */
+#define MMHG_TO_PASCAL (MERCURY_DENSITY*1e-3*GRAVACC)
+#define FTHG_TO_PASCAL (MERCURY_DENSITY*FOOT_TO_METRE*GRAVACC)
+#define MMH2O_TO_PASCAL (WATER_DENSITY*1e-3*GRAVACC)
+#define FTH2O_TO_PASCAL (WATER_DENSITY*FOOT_TO_METRE*GRAVACC)
+#define LBF_PER_SQFT_TO_PASCAL (LBF_TO_NEWTON/FOOT_TO_METRE/FOOT_TO_METRE)
+#define LBF_PER_SQIN_TO_PASCAL (LBF_TO_NEWTON/INCH_TO_METRE/INCH_TO_METRE)
+#define PDL_PER_SQFT_TO_PASCAL (POUNDAL_TO_NEWTON/FOOT_TO_METRE/FOOT_TO_METRE)
 
 /* Energy */
 #define ELECTRONVOLT_TO_JOULE 1.60217653e-19
@@ -93,6 +107,7 @@ int conv_length(double, char *, unsigned int);
 int conv_area(double, char *, unsigned int);
 int conv_mass(double, char *, unsigned int);
 int conv_force(double, char *, unsigned int);
+int conv_pressure(double, char *, unsigned int);
 int conv_energy(double, char *, unsigned int);
 int conv_power(double, char *, unsigned int);
 int conv_temperature(double, char *, unsigned int);

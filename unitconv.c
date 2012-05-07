@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
 		if (conv_area(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
 		if (conv_mass(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
 		if (conv_force(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
+		if (conv_pressure(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
 		if (conv_energy(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
 		if (conv_power(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
 		if (conv_temperature(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
