@@ -13,3 +13,6 @@ unitconv.exe
 *.lai
 *.la
 *.a
+
+# backup files
+*~
