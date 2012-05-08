@@ -65,6 +65,9 @@
 #define JAPANESE_SHOH_TO_CUMETRE (2.401/1331.0)
 #define PLANCK_VOLUME (PLANCK_AREA*PLANCK_LENGTH)
 
+/* Angle */
+#define RADIAN_TO_DEGREE (180.0/M_PI)
+
 /* Mass */
 #define POUND_AV_TO_KILOGRAM 4.5359237e-1
 #define OUNCE_AV_TO_KILOGRAM (POUND_AV_TO_KILOGRAM/16)
@@ -135,6 +138,7 @@
 int conv_length(double, char *, unsigned int);
 int conv_area(double, char *, unsigned int);
 int conv_volume(double, char *, unsigned int);
+int conv_angle(double, char *, unsigned int);
 int conv_mass(double, char *, unsigned int);
 int conv_time(double, char *, unsigned int);
 int conv_force(double, char *, unsigned int);

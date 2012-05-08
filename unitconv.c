@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
 		if (conv_length(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
 		if (conv_area(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
 		if (conv_volume(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
+		if (conv_angle(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
 		if (conv_mass(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
 		if (conv_time(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
 		if (conv_force(val, unitname, 0) != RET_UNKNOWN_UNIT) mark_checked;
