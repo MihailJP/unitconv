@@ -58,7 +58,7 @@ int conv_length(double val, char *unitname, unsigned int chainflag)
 		{"pace", FOOT_TO_METRE * 2.5, 0, {""}},
 		{"yd", FOOT_TO_METRE * 3, 0, {"yard",""}},
 		{"ell", FOOT_TO_METRE * 3.75, 0, {""}},
-		{"fathom", FOOT_TO_METRE * 6, 0, {"fm",""}},
+		{"fm", FOOT_TO_METRE * 6, 0, {"fathom",""}},
 		{"rd", FOOT_TO_METRE * 16.5, 0, {"rod","pole","perch",""}},
 		{"rope", FOOT_TO_METRE * 20, 0, {""}},
 		{"ch", CHAIN_TO_METRE, 0, {"chain",""}},

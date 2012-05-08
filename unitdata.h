@@ -50,6 +50,21 @@
 #define JAPANESE_TSUBO_TO_SQMETRE (JAPANESE_FOOT_TO_METRE*JAPANESE_FOOT_TO_METRE*36)
 #define PLANCK_AREA H_BAR*GRAVCONST/LIGHTSPEED/LIGHTSPEED/LIGHTSPEED
 
+/* Volume */
+#define CUINCH_TO_CUMETRE (INCH_TO_METRE*INCH_TO_METRE*INCH_TO_METRE)
+#define CUFOOT_TO_CUMETRE (FOOT_TO_METRE*FOOT_TO_METRE*FOOT_TO_METRE)
+#define CUMILE_TO_CUMETRE (MILE_TO_METRE*MILE_TO_METRE*MILE_TO_METRE)
+#define GALLON_TO_CUMETRE 4.54609e-3
+#define FL_OUNCE_TO_CUMETRE (GALLON_TO_CUMETRE/160.0)
+#define GILL_TO_CUMETRE (FL_OUNCE_TO_CUMETRE*5)
+#define BUSHEL_TO_CUMETRE (GALLON_TO_CUMETRE/8)
+#define US_LVL_BUSHEL_TO_CUMETRE (CUINCH_TO_CUMETRE*2150.42)
+#define US_DRY_GALLON_TO_CUMETRE (US_LVL_BUSHEL_TO_CUMETRE/8)
+#define WINE_GALLON_TO_CUMETRE (CUINCH_TO_CUMETRE*231.0)
+#define US_FL_OUNCE_TO_CUMETRE (WINE_GALLON_TO_CUMETRE/128.0)
+#define JAPANESE_SHOH_TO_CUMETRE (2.401/1331.0)
+#define PLANCK_VOLUME (PLANCK_AREA*PLANCK_LENGTH)
+
 /* Mass */
 #define POUND_AV_TO_KILOGRAM 4.5359237e-1
 #define OUNCE_AV_TO_KILOGRAM (POUND_AV_TO_KILOGRAM/16)
@@ -119,6 +134,7 @@
 /* Functions */
 int conv_length(double, char *, unsigned int);
 int conv_area(double, char *, unsigned int);
+int conv_volume(double, char *, unsigned int);
 int conv_mass(double, char *, unsigned int);
 int conv_time(double, char *, unsigned int);
 int conv_force(double, char *, unsigned int);

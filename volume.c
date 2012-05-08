@@ -1,0 +1,127 @@
+#include <stdio.h>
+#include "unitconv.h"
+#include "calc.h"
+#include "unitdata.h"
+
+int conv_volume(double val, char *unitname, unsigned int chainflag)
+{
+	int i, ret; double cnvval;
+	unit unitlist[] = {
+		/* Metric */
+		{"um^3", 1e-21, 0, {"um3","cubicmicrometer","cubicmicrometre","cubic micrometer","cubic micrometre","micrometercubed","micrometrecubed","micrometer cubed","micrometre cubed","fl","fL","femtoliter","femtolitre",""}},
+		{"mm^3", 1e-9, 0, {"mm3","cubicmillimeter","cubicmillimetre","cubic millimeter","cubic millimetre","millimetercubed","millimetrecubed","millimeter cubed","millimetre cubed","ul","uL","microliter","microlitre","lambda",""}},
+		{"cm^3", 1e-6, 0, {"cm3","cc","cubiccentimeter","cubiccentimetre","cubic centimeter","cubic centimetre","centimetercubed","centimetrecubed","centimeter cubed","centimetre cubed","ml","mL","milliliter","millilitre","cuo1","cuo",""}},
+		{"dm^3", 1e-3, 0, {"dm3","cubicdecimeter","cubicdecimetre","cubic decimeter","cubic decimetre","decimetercubed","decimetrecubed","decimeter cubed","decimetre cubed","l","L","liter","litre","sheng1","sheng",""}},
+		{"m^3", 1e0, 0, {"m3","cubicmeter","cubicmetre","cubic meter","cubic metre","metercubed","metrecubed","meter cubed","metre cubed","kl","kL","kiloliter","kilolitre","st","stere",""}},
+		/* Litre */
+		{"pl", 1e-18, 0, {"pL","picoliter","picolitre",""}},
+		{"nl", 1e-15, 0, {"nL","nanoliter","nanolitre",""}},
+		{"cl", 1e-5, 0, {"cL","centiliter","centilitre","shao2","shao",""}},
+		{"dl", 1e-4, 0, {"dL","deciliter","decilitre","ge3","ge",""}},
+		{"dal", 1e-2, 0, {"daL","decaliter","decalitre","dou3","dou",""}},
+		{"hl", 1e-1, 0, {"hL","hectoliter","hectolitre","dan4","dan",""}},
+		/* Measuring spoon and cup */
+		{"tsp", 5e-9, 0, {"teaspoon",""}},
+		{"tsp(imp)", GILL_TO_CUMETRE / 24, 0, {"teaspoon(imp)","tsp(imperial)","teaspoon(imperial)",""}},
+		{"tsp(CA)", FL_OUNCE_TO_CUMETRE / 6, 0, {"teaspoon(CA)","tsp(Canadian)","teaspoon(Canadian)",""}},
+		{"tbsp", 15e-9, 0, {"tablespoon",""}},
+		{"tbsp(imp)", FL_OUNCE_TO_CUMETRE * 5 / 8, 0, {"tablespoon(imp)","tbsp(imperial)","tablespoon(imperial)",""}},
+		{"tbsp(CA)", FL_OUNCE_TO_CUMETRE / 2, 0, {"tablespoon(CA)","tbsp(Canadian)","tablespoon(Canadian)",""}},
+		{"cup", 250e-9, 0, {""}},
+		{"cup(CA)", FL_OUNCE_TO_CUMETRE * 8, 0, {"cup(Canadian)",""}},
+		{"cup(breakfast)", FL_OUNCE_TO_CUMETRE * 10, 0, {""}},
+		{"cup(US labeling)", 240e-9, 0, {"cup(USlabeling)",""}},
+		{"cup(JP)", 200e-9, 0, {"cup(Japanese)",""}},
+		/* Miscellaneous */
+		{"gtt", 1e-6 / 20, 0, {"drop",""}},
+		{"gtt(medical)", 1e-6 / 12, 0, {"drop(medical)",""}},
+		/* Planck unit */
+		{"l^3_p", PLANCK_VOLUME, 0, {"l3_p","planckvolume","planck volume","Planck volume",""}},
+		/* US customary-Imperial */
+		{"cu in", CUINCH_TO_CUMETRE, 0, {"cuin","in^3","in3","cubicinch","cubic inch","inchcubed","inch cubed",""}},
+		{"fbm", CUINCH_TO_CUMETRE * 144, 0, {"board-foot","boardfoot",""}},
+		{"cu ft", CUFOOT_TO_CUMETRE, 0, {"cuft","ft^3","ft3","cubicfoot","cubic foot","footcubed","foot cubed","timberfoot","timber foot",""}},
+		{"cord-foot", CUFOOT_TO_CUMETRE * 16, 0, {"cordfoot",""}},
+		{"cu yd", CUFOOT_TO_CUMETRE * 27, 0, {"cuyd","yd^3","yd3","cubicyard","cubic yard","yardcubed","yard cubed",""}},
+		{"ton(displacement)", CUFOOT_TO_CUMETRE * 35, 0, {"displacementton","displacement ton",""}},
+		{"ton(freight)", CUFOOT_TO_CUMETRE * 40, 0, {"freightton","freight ton",""}},
+		{"load", CUFOOT_TO_CUMETRE * 50, 0, {""}},
+		{"register ton", CUFOOT_TO_CUMETRE * 100, 0, {"registerton",""}},
+		{"cord(firewood)", CUFOOT_TO_CUMETRE * 128, 0, {"cord",""}},
+		{"cu fm", CUFOOT_TO_CUMETRE * 216, 0, {"cufm","fm^3","fm3","cubicfathom","cubic fathom","fathomcubed","fathom cubed",""}},
+		{"ac in", ACRE_TO_SQMETRE * INCH_TO_METRE, 0, {"acin","acreinch","acre-inch",""}},
+		{"ac ft", ACRE_TO_SQMETRE * FOOT_TO_METRE, 0, {"acft","acrefoot","acre-foot",""}},
+		{"cu mi", CUMILE_TO_CUMETRE, 0, {"cumi","mi^3","mi3","cubicmile","cubic mile","milecubed","mile cubed",""}},
+		{"beer gal", CUINCH_TO_CUMETRE * 282, 0, {"beer gallon","beergal","beergallon",""}},
+		/* Imperial, gallon &c. */
+		{"min", FL_OUNCE_TO_CUMETRE / 480, 0, {"minim",""}},
+		{"gtt(imp)", FL_OUNCE_TO_CUMETRE / 288, 0, {"drop(imp)","gtt(imperial)","drop(imperial)",""}},
+		{"gtt(imp alt)", GILL_TO_CUMETRE / 1824, 0, {"drop(imp alt)","gtt(impalt)","drop(impalt)","gtt(imperial alt)","drop(imperial alt)","gtt(imperialalt)","drop(imperialalt)",""}},
+		{"dash", GILL_TO_CUMETRE / 384, 0, {""}},
+		{"pinch", GILL_TO_CUMETRE / 192, 0, {""}},
+		{"fl s", FL_OUNCE_TO_CUMETRE / 24, 0, {"fls","fluidscruple","fluid scruple",""}},
+		{"fl dr", FL_OUNCE_TO_CUMETRE / 8, 0, {"fldr","fluiddrachm","fluid drachm",""}},
+		{"fl oz", FL_OUNCE_TO_CUMETRE, 0, {"floz","fluidounce","fluid ounce",""}},
+		{"gi", GILL_TO_CUMETRE, 0, {"gill","nog","noggin","Noggin",""}},
+		{"pt", GALLON_TO_CUMETRE / 8, 0, {"pint",""}},
+		{"qt", GALLON_TO_CUMETRE / 4, 0, {"quart",""}},
+		{"pottle", GALLON_TO_CUMETRE / 2, 0, {"quartern",""}},
+		{"gal", GALLON_TO_CUMETRE, 0, {"gallon",""}},
+		{"pk", GALLON_TO_CUMETRE * 2, 0, {"peck",""}},
+		{"bkt", GALLON_TO_CUMETRE * 4, 0, {"bucket",""}},
+		{"bu", BUSHEL_TO_CUMETRE, 0, {"bushel",""}},
+		{"strike", BUSHEL_TO_CUMETRE * 2, 0, {""}},
+		{"sack", BUSHEL_TO_CUMETRE * 3, 0, {"bag",""}},
+		{"coomb", BUSHEL_TO_CUMETRE * 4, 0, {""}},
+		{"kilderkin", GALLON_TO_CUMETRE * 18, 0, {""}},
+		{"bl", GALLON_TO_CUMETRE * 36, 0, {"barrel",""}},
+		{"quarter", BUSHEL_TO_CUMETRE * 8, 0, {"pail",""}},
+		{"hhd", GALLON_TO_CUMETRE * 36 * 2, 0, {"hogshead",""}},
+		{"ton(water)", BUSHEL_TO_CUMETRE * 28, 0, {""}},
+		{"last", BUSHEL_TO_CUMETRE * 80, 0, {""}},
+		/* US customary */
+		{"min(US)", US_FL_OUNCE_TO_CUMETRE / 480, 0, {"minim(US)",""}},
+		{"gtt(US)", US_FL_OUNCE_TO_CUMETRE / 360, 0, {"drop(US)",""}},
+		{"gtt(US alt)", US_FL_OUNCE_TO_CUMETRE / 456, 0, {"drop(US alt)","gtt(USalt)","drop(USalt)",""}},
+		{"dash(US)", US_FL_OUNCE_TO_CUMETRE / 96, 0, {""}},
+		{"pinch(US)", US_FL_OUNCE_TO_CUMETRE / 48, 0, {""}},
+		{"fl dr(US)", US_FL_OUNCE_TO_CUMETRE / 8, 0, {"fldr(US)","fluiddram","fluid dram","fluidram",""}},
+		{"pony", US_FL_OUNCE_TO_CUMETRE * .75, 0, {""}},
+		{"fl oz(US)", US_FL_OUNCE_TO_CUMETRE, 0, {"floz(US)","fluidounce(US)","fluid ounce(US)","shot",""}},
+		{"fl oz(US labeling)", 30e-6, 0, {"floz(USlabeling)","fluidounce(USlabeling)","fluid ounce(US labeling)",""}},
+		{"gi(US)", US_FL_OUNCE_TO_CUMETRE * 4, 0, {"gill(US)",""}},
+		{"jigger", US_FL_OUNCE_TO_CUMETRE * 1.5, 0, {"jigger",""}},
+		{"pt(US)", GALLON_TO_CUMETRE / 8, 0, {"pint(US)",""}},
+		{"fl pt(US)", WINE_GALLON_TO_CUMETRE / 8, 0, {"flpt(US)","fluidpint(US)","fluid pint(US)",""}},
+		{"qt(US)", GALLON_TO_CUMETRE / 4, 0, {"quart(US)",""}},
+		{"fifth", WINE_GALLON_TO_CUMETRE / 5, 0, {""}},
+		{"fl qt(US)", WINE_GALLON_TO_CUMETRE / 4, 0, {"flqt(US)","fluidquart(US)","fluid quart(US)",""}},
+		{"gal(US)", US_DRY_GALLON_TO_CUMETRE, 0, {"gallon(US)",""}},
+		{"fl gal(US)", WINE_GALLON_TO_CUMETRE, 0, {"flgal(US)","fluidgallon(US)","fluid gallon(US)","gal(wine)","gallon(wine)","winegallon","wine gallon",""}},
+		{"pk(US)", US_LVL_BUSHEL_TO_CUMETRE / 4, 0, {"peck(US)",""}},
+		{"bu(US lvl)", US_LVL_BUSHEL_TO_CUMETRE, 0, {"bushel(US lvl)","bushel(US level)","bu(USlvl)","bushel(USlvl)",""}},
+		{"bu(US)", US_LVL_BUSHEL_TO_CUMETRE * 1.25, 0, {"bushel(US)","bu(US heaped)","bushel(US heaped)","bu(USheaped)","bushel(USheaped)",""}},
+		{"firkin", US_DRY_GALLON_TO_CUMETRE * 9, 0, {""}},
+		{"strike(US)", US_LVL_BUSHEL_TO_CUMETRE * 2, 0, {""}},
+		{"sack(US)", US_LVL_BUSHEL_TO_CUMETRE * 3, 0, {""}},
+		{"bl(US)", US_LVL_BUSHEL_TO_CUMETRE * 105 / 32, 0, {"barrel(US)",""}},
+		{"fl bl(US)", WINE_GALLON_TO_CUMETRE * 31.5, 0, {"flbl(US)","fluidbarrel(US)","fluid barrel(US)",""}},
+		{"bbl", WINE_GALLON_TO_CUMETRE * 42, 0, {"bl(petroleum)","barrel(petroleum)",""}},
+		{"seam", US_LVL_BUSHEL_TO_CUMETRE * 8, 0, {""}},
+		{"hhd(US)", WINE_GALLON_TO_CUMETRE * 31.5 * 2, 0, {"hogshead(US)",""}},
+		{"butt", WINE_GALLON_TO_CUMETRE * 126, 0, {"pipe",""}},
+		{"tun", WINE_GALLON_TO_CUMETRE * 252, 0, {""}},
+		{"wey", US_LVL_BUSHEL_TO_CUMETRE * 40, 0, {""}},
+		/* Japanese */
+		{"sai", JAPANESE_SHOH_TO_CUMETRE / 1000, 0, {""}},
+		{"shaku", JAPANESE_SHOH_TO_CUMETRE / 100, 0, {""}},
+		{"goh", JAPANESE_SHOH_TO_CUMETRE / 10, 0, {"go","gou",""}},
+		{"shoh", JAPANESE_SHOH_TO_CUMETRE, 0, {"sho","shou",""}},
+		{"to", JAPANESE_SHOH_TO_CUMETRE * 10, 0, {""}},
+		{"koku", JAPANESE_SHOH_TO_CUMETRE * 100, 0, {""}},
+	};
+	unsigned int listlen = (sizeof(unitlist) / sizeof(unit));
+	
+	ret = calculate(val, unitname, listlen, unitlist, chainflag, "volume", &cnvval);
+	return ret;
+}
