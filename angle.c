@@ -38,3 +38,18 @@ int conv_angle(double val, char *unitname, unsigned int chainflag)
 	ret = calculate(val, unitname, listlen, unitlist, chainflag, "angle", &cnvval);
 	return ret;
 }
+
+int conv_solidangle(double val, char *unitname, unsigned int chainflag)
+{
+	int i, ret; double cnvval;
+	unit unitlist[] = {
+		/* SI */
+		{"sr", 1, 0, {"steradian",""}},
+		/* Astronomical */
+		{"sq deg", SQDEG_TO_STERADIAN, 0, {"sqdeg","square degree",""}},
+	};
+	unsigned int listlen = (sizeof(unitlist) / sizeof(unit));
+	
+	ret = calculate(val, unitname, listlen, unitlist, chainflag, "solid angle", &cnvval);
+	return ret;
+}

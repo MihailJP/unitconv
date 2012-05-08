@@ -68,6 +68,9 @@
 /* Angle */
 #define RADIAN_TO_DEGREE (180.0/M_PI)
 
+/* Solid Angle */
+#define SQDEG_TO_STERADIAN (1.0/RADIAN_TO_DEGREE/RADIAN_TO_DEGREE)
+
 /* Mass */
 #define POUND_AV_TO_KILOGRAM 4.5359237e-1
 #define OUNCE_AV_TO_KILOGRAM (POUND_AV_TO_KILOGRAM/16)
@@ -139,6 +142,7 @@ int conv_length(double, char *, unsigned int);
 int conv_area(double, char *, unsigned int);
 int conv_volume(double, char *, unsigned int);
 int conv_angle(double, char *, unsigned int);
+int conv_solidangle(double, char *, unsigned int);
 int conv_mass(double, char *, unsigned int);
 int conv_time(double, char *, unsigned int);
 int conv_force(double, char *, unsigned int);
